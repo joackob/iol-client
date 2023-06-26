@@ -15,6 +15,7 @@ pandas = "*"
 
 [dev-packages]
 ipykernel = "*"
+pytest-asyncio = "*"
 pytest = "*"
 
 [requires]

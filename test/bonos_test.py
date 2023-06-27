@@ -11,4 +11,4 @@ async def test_bonos():
     password = os.getenv("IOL_PASS") or ""
     client = IOLClient(username=user, password=password)
     titulo = await client.get_titulo("GGAL", Mercado.BCBA)
-    assert titulo.json != {}
+    assert titulo["message"] != "Authorization has been denied for this request."

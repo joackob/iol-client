@@ -6,9 +6,9 @@ import pytest
 
 
 @pytest.mark.asyncio
-async def test_bonos():
+async def test_get_asesores_test_inversor():
     user = os.getenv("IOL_USER") or ""
     password = os.getenv("IOL_PASS") or ""
     client = IOLClient(username=user, password=password)
-    titulo = await client.get_titulo("GGAL", Mercado.BCBA)
-    assert titulo["message"] != "Authorization has been denied for this request."
+    test = await client.get_asesores_test_inversor()
+    assert test["message"] != "Authorization has been denied for this request."

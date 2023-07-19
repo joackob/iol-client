@@ -12,6 +12,8 @@ pip = "*"
 install = "*"
 aiohttp = "*"
 pandas = "*"
+openpyxl = "*"
+et-xmlfile = "*"
 
 [dev-packages]
 ipykernel = "*"

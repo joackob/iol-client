@@ -1,4 +1,10 @@
-class Mercado:
+from enum import Enum
+
+
+class Mercado(Enum):
+    def __str__(self):
+        return self.value
+
     BCBA = "bCBA"
     NYSE = "nYSE"
     NASDAQ = "nASDAQ"
@@ -7,13 +13,19 @@ class Mercado:
     ROFX = "rOFX"
 
 
-class Pais:
+class Pais(Enum):
+    def __str__(self):
+        return self.value
+
     ARG = "argentina"
     USA = "estados_Unidos"
 
 
 class Instrumento:
-    class ARG:
+    class ARG(Enum):
+        def __str__(self) -> str:
+            return self.value
+
         ACCIONES = "Acciones"
         BONOS = "Bonos"
         OPCIONES = "Opciones"
@@ -21,7 +33,10 @@ class Instrumento:
         FUTUROS = "Futuros"
         FCI = "FCI"
 
-    class USA:
+    class USA(Enum):
+        def __str__(self) -> str:
+            return self.value
+
         ACCIONES = "Acciones"
         BONOS = "Bonos"
         ETFS = "Etfs"
@@ -30,7 +45,10 @@ class Instrumento:
 
 class Panel:
     class ARG:
-        class ACCIONES:
+        class ACCIONES(Enum):
+            def __str__(self) -> str:
+                return self.value
+
             MERVAL = "Merval"
             PANEL_GENERAL = "Panel General"
             MERVAL_25 = "Merval 25"
@@ -38,7 +56,10 @@ class Panel:
             BURCAP = "Burcap"
             CEDEARS = "CEDEARs"
 
-        class BONOS:
+        class BONOS(Enum):
+            def __str__(self) -> str:
+                return self.value
+
             SOBERANO_ARS_CER = "Soberanos en pesos más Cer"
             SOBERANO_ARS_TF = "Soberanos en pesos a tasa variable"
             SOBERANO_ARS_TV = "Soberanos en pesos a tasa fija"
@@ -52,7 +73,10 @@ class Panel:
             CORPORATIVOS_ARS = "Bonos corporativos en pesos"
             CORPORATIVOS_USD = "Bonos corporativos en dólares"
 
-        class OPCIONES:
+        class OPCIONES(Enum):
+            def __str__(self) -> str:
+                return self.value
+
             ACCIONES = "De Acciones"
             BONOS = "De Bonos"
             CEDEARS = "De Cedears"
@@ -61,7 +85,10 @@ class Panel:
             CALLS = "Calls"
             PUTS = "Puts"
 
-        class FUTUROS:
+        class FUTUROS(Enum):
+            def __str__(self) -> str:
+                return self.value
+
             TODOS = "Todos"
             USD = "Dólar USA"
             MERVAL = "MERVAL"
@@ -78,7 +105,10 @@ class Panel:
             MAIZ = "Maíz"
             TRIGO = "Trigo"
 
-        class FCI:
+        class FCI(Enum):
+            def __str__(self) -> str:
+                return self.value
+
             TODOS = "Todos"
             PLAZOS_FIJOS_ARS = "Plazos Fijos Pesos"
             PLAZOS_FIJOS_USD = "Plazos Fijos Dólares"
@@ -90,7 +120,10 @@ class Panel:
             RENTA_VARIABLE_USD = "Renta Variable Dólares"
 
     class USA:
-        class BONOS:
+        class BONOS(Enum):
+            def __str__(self) -> str:
+                return self.value
+
             SOBERANO_ARS_CER = "Soberanos en pesos más Cer"
             SOBERANO_ARS_TF = "Soberanos en pesos a tasa variable"
             SOBERANO_ARS_TV = "Soberanos en pesos a tasa fija"
@@ -105,25 +138,37 @@ class Panel:
             CORPORATIVOS_USD = "Bonos corporativos en dólares"
 
 
-class Ajustada:
+class Ajustada(Enum):
+    def __str__(self) -> str:
+        return self.value
+
     AJUSTADA = "ajustada"
     SIN_AJUSTAR = "sinAjustar"
 
 
-class Plazo:
+class Plazo(Enum):
+    def __str__(self) -> str:
+        return self.value
+
     T0 = "t0"
     T1 = "t1"
     T2 = "t2"
 
 
-class Administradora:
+class Administradora(Enum):
+    def __str__(self) -> str:
+        return self.value
+
     CONVEXITY = "CONVEXITY"
     SUPERVIELLE = "SUPERVIELLE"
     # ALLARIA = "Allaria"
     # ALLIANCE_BERNSTEIN = "ALLIANCE BERNSTEIN"
 
 
-class TipoFondo:
+class TipoFondo(Enum):
+    def __str__(self) -> str:
+        return self.value
+
     PLAZO_FIJO_PESOS = "plazo_fijo_pesos"
     RENTA_FIJA_PESOS = "renta_fija_pesos"
     RENTA_MIXTA_PESOS = "renta_mixta_pesos"
@@ -134,12 +179,28 @@ class TipoFondo:
     RENTA_VARIABLE_DOLARES = "renta_variable_dolares"
 
 
-class TipoDeOrden:
+class TipoDeOrden(Enum):
+    def __str__(self) -> str:
+        return self.value
+
     PRECIO_LIMITE = "precioLimite"
     PRECIO_MERCADO = "precioMercado"
 
 
-class Tarifas:
+class Tarifas(Enum):
+    def __str__(self) -> str:
+        return str(self.value)
+
     GOLD = 0.005
     PLATINUM = 0.003
     BLACK = 0.001
+
+
+class EstadoDeOperaciones(Enum):
+    def __str__(self) -> str:
+        return self.value
+
+    TODAS = "todas"
+    PENDIENTES = "pendientes"
+    TERMINADAS = "terminadas"
+    CANCELADAS = "canceladas"

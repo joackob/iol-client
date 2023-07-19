@@ -1,9 +1,10 @@
 from datetime import datetime
 
-from constants import Plazo, TipoDeOrden
+from .constants import Plazo, TipoDeOrden
 
 
-class OrdenCompra:
+# Refactor: usar dataclass
+class OrdenDeCompra:
     """
      ComprarBindingModel {
         mercado (string): = ['bCBA', 'nYSE', 'nASDAQ', 'aMEX', 'bCS', 'rOFX'],
@@ -83,7 +84,7 @@ class OrdenCompra:
         return ord
 
 
-class OrdenVenta:
+class OrdenDeVenta:
     """
     VenderBindingModel {
         mercado (string): = ['bCBA', 'nYSE', 'nASDAQ', 'aMEX', 'bCS', 'rOFX'],

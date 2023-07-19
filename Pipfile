@@ -9,7 +9,6 @@ test = "pytest"
 [packages]
 requests = "*"
 pip = "*"
-install = "*"
 aiohttp = "*"
 pandas = "*"
 openpyxl = "*"

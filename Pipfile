@@ -9,11 +9,11 @@ test = "pytest"
 [packages]
 requests = "*"
 pip = "*"
-install = "*"
 aiohttp = "*"
 pandas = "*"
 openpyxl = "*"
 et-xmlfile = "*"
+matplotlib = "*"
 
 [dev-packages]
 ipykernel = "*"

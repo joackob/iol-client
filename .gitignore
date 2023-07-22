@@ -161,3 +161,4 @@ cython_debug/
 
 # Excel files
 *.xls
+*.xlsx

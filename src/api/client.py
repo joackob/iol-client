@@ -24,6 +24,10 @@ from .constants import (
 BASE_URL = "https://api.invertironline.com/api/v2/"
 
 
+def format_date(date):
+    return date.strftime("%Y-%m-%dT%H:%M:%S.%f")[:-3] + "Z"
+
+
 class MethodRequest(Enum):
     def __str__(self) -> str:
         return self.value
@@ -81,16 +85,16 @@ class IOLClient:
     # obtiene las preguntas del test inversor
     async def get_asesores_test_inversor(self):
         path = "asesores/test-inversor"
-        return await self._request(MethodRequest.GET, url=path)
+        return await self._request(method=MethodRequest.GET, url=path)
 
     # envia las respuestas del test inversor
     async def post_asesores_test_inversor(
-        self, respuesta_inversor, id_cliente_asesorado: int = 0
+        self, respuesta_inversor, id_cliente_asesorado: int | None = None
     ):
         path = (
-            "asesores/test-inversor"
-            if id_cliente_asesorado == 0
-            else f"asesores/test-inversor/{id_cliente_asesorado}"
+            f"asesores/test-inversor/{id_cliente_asesorado}"
+            if id_cliente_asesorado is not None
+            else "asesores/test-inversor"
         )
         return await self._request(
             method=MethodRequest.POST, url=path, json_body=respuesta_inversor
@@ -101,12 +105,12 @@ class IOLClient:
     # Datos del estado de la cuenta del cliente autenticado
     async def get_estado_cuenta(self):
         path = f"estadocuenta"
-        return await self._request(MethodRequest.GET, url=path)
+        return await self._request(method=MethodRequest.GET, url=path)
 
     # Datos del portafolio del cliente autenticado para un pais determinado
     async def get_portafolio(self, pais: Pais):
         path = f"portafolio/{pais}"
-        return await self._request(MethodRequest.GET, url=path)
+        return await self._request(method=MethodRequest.GET, url=path)
 
     # Datos de las operaciones del cliente autenticado de acuerdo a los filtros propuestos
     async def get_operaciones(
@@ -121,10 +125,10 @@ class IOLClient:
             method=MethodRequest.GET,
             url=path,
             json_body={
-                "estado": estado,
-                "pais": pais,
-                "fechaDesde": fecha_desde,
-                "fechaHasta": fecha_hasta,
+                "estado": estado.value,
+                "pais": pais.value,
+                "fechaDesde": format_date(fecha_desde),
+                "fechaHasta": format_date(fecha_hasta),
             },
         )
 
@@ -150,7 +154,7 @@ class IOLClient:
         return await self._request(
             method=MethodRequest.POST,
             url=path,
-            json_body=orden_venta,
+            json_body=orden_venta.json(),
         )
 
     async def post_operar_comprar(self, orden_compra: OrdenDeCompra):
@@ -158,7 +162,7 @@ class IOLClient:
         return await self._request(
             method=MethodRequest.POST,
             url=path,
-            json_body=orden_compra,
+            json_body=orden_compra.json(),
         )
 
     async def post_operar_rescate_fci(self, orden_fci: OrdenFCI):
@@ -166,7 +170,7 @@ class IOLClient:
         return await self._request(
             method=MethodRequest.POST,
             url=path,
-            json_body=orden_fci,
+            json_body=orden_fci.json(),
         )
 
     async def post_operar_suscripcion_fci(self, orden_fci: OrdenFCI):
@@ -174,7 +178,7 @@ class IOLClient:
         return await self._request(
             method=MethodRequest.POST,
             url=path,
-            json_body=orden_fci,
+            json_body=orden_fci.json(),
         )
 
     # ----------------------------

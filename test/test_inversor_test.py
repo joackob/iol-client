@@ -1,7 +1,5 @@
 import os
-import asyncio
 from src.api.client import IOLClient
-from src.api.constants import Mercado
 import pytest
 
 

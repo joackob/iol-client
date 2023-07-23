@@ -1,45 +1,33 @@
+from dataclasses import dataclass
 from datetime import datetime
 
-from .constants import Plazo, TipoDeOrden
+from .constants import Mercado, Plazo, TipoDeOrden
+
+
+def validez_by_default():
+    today = datetime.now()
+    return datetime(today.year, today.month, today.day, 23, 59, 59)
 
 
 # Refactor: usar dataclass
 class OrdenDeCompra:
-    """
-     ComprarBindingModel {
-        mercado (string): = ['bCBA', 'nYSE', 'nASDAQ', 'aMEX', 'bCS', 'rOFX'],
-        simbolo (string): ,
-        cantidad (number, optional): ,
-        precio (number): ,
-        validez (string): ,
-        tipoOrden (string, optional) = ['precioLimite', 'precioMercado'],
-        plazo (string): = ['t0', 't1', 't2'],
-        monto (number, optional)
-    }
-    """
-
     def __init__(
         self,
-        mercado,
-        simbolo,
-        validez=None,
-        cantidad=None,
-        monto=None,
-        precio=0,
-        tipo_orden=TipoDeOrden.PRECIO_LIMITE,
-        plazo=Plazo.T2,
+        mercado: Mercado,
+        simbolo: str,
+        validez: datetime | None = None,
+        cantidad: int | None = None,
+        monto: int | None = None,
+        precio: int = 0,
+        tipo_orden: TipoDeOrden = TipoDeOrden.PRECIO_LIMITE,
+        plazo: Plazo = Plazo.T2,
     ) -> None:
         self.type = type
         self.mercado = mercado
         self.simbolo = simbolo
         self.cantidad = cantidad
         self.precio = precio
-
-        if validez is not None:
-            self.validez = validez
-        else:
-            self.set_validez()
-
+        self.validez = validez or validez_by_default()
         self.tipo_orden = tipo_orden
         self.plazo = plazo
         self.monto = monto
@@ -62,17 +50,13 @@ class OrdenDeCompra:
                 "Precio debe ser mayor que 0 para tipo_orden='precioLimite'"
             )
 
-    def set_validez(self):
-        dt = datetime.now()
-        self.validez = datetime(dt.year, dt.month, dt.day, 23, 59, 59)
-
-    def crear(self):
+    def json(self):
         ord = {
-            "mercado": self.mercado,
+            "mercado": self.mercado.value,
             "simbolo": self.simbolo,
-            "tipoOrden": self.tipo_orden,
+            "tipoOrden": self.tipo_orden.value,
             "precio": self.precio,
-            "plazo": self.plazo,
+            "plazo": self.plazo.value,
             "validez": self.validez.strftime("%Y-%m-%dT%H:%M:%S.%f")[:-3] + "Z",
         }
 
@@ -85,39 +69,22 @@ class OrdenDeCompra:
 
 
 class OrdenDeVenta:
-    """
-    VenderBindingModel {
-        mercado (string): = ['bCBA', 'nYSE', 'nASDAQ', 'aMEX', 'bCS', 'rOFX'],
-        simbolo (string): ,
-        cantidad (number): ,
-        precio (number): ,
-        validez (string): ,
-        tipoOrden (string, optional) = ['precioLimite', 'precioMercado'],
-        plazo (string, optional) = ['t0', 't1', 't2']
-    }
-    """
-
     def __init__(
         self,
-        mercado,
-        simbolo,
-        cantidad,
-        validez=None,
-        precio=0,
-        tipo_orden=TipoDeOrden.PRECIO_LIMITE,
-        plazo=Plazo.T2,
+        mercado: Mercado,
+        simbolo: str,
+        cantidad: int,
+        validez: datetime | None = None,
+        precio: int = 0,
+        tipo_orden: TipoDeOrden = TipoDeOrden.PRECIO_LIMITE,
+        plazo: Plazo = Plazo.T2,
     ) -> None:
         self.type = type
         self.mercado = mercado
         self.simbolo = simbolo
         self.cantidad = cantidad
         self.precio = precio
-
-        if validez:
-            self.validez = validez
-        else:
-            self.set_validez()
-
+        self.validez = validez or validez_by_default()
         self.tipo_orden = tipo_orden
         self.plazo = plazo
         self._validar()
@@ -134,30 +101,26 @@ class OrdenDeVenta:
                 "Precio debe ser mayor que 0 para tipo_orden='precioLimite'"
             )
 
-    def set_validez(self):
-        dt = datetime.now()
-        self.validez = datetime(dt.year, dt.month, dt.day, 23, 59, 59)
-
-    def crear(self):
+    def json(self):
         ord = {
-            "mercado": self.mercado,
+            "mercado": self.mercado.value,
             "simbolo": self.simbolo,
-            "tipoOrden": self.tipo_orden,
+            "tipoOrden": self.tipo_orden.value,
             "precio": self.precio,
             "cantidad": self.cantidad,
-            "plazo": self.plazo,
+            "plazo": self.plazo.value,
             "validez": self.validez.strftime("%Y-%m-%dT%H:%M:%S.%f")[:-3] + "Z",
         }
         return ord
 
 
+@dataclass
 class OrdenFCI:
-    def __init__(self, simbolo, cantidad, solo_validar) -> None:
-        self.simbolo = simbolo
-        self.cantidad = cantidad
-        self.solo_validar = solo_validar
+    simbolo: str = ""
+    cantidad: int = 0
+    solo_validar: bool = True
 
-    def crear(self):
+    def json(self):
         ord = {
             "simbolo": self.simbolo,
             "cantidad": self.cantidad,

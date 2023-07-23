@@ -18,11 +18,19 @@ DEFAULT_HEADERS = {
 
 
 class TokenManager:
-    def __init__(self, username, password, logging_level=logging.NOTSET) -> None:
+    def __init__(
+        self, username: str, password: str, logging_level=logging.NOTSET
+    ) -> None:
         self.logger = get_logger(__name__, logging_level)
         self._username = username
         self._password = password
-        self.token = None
+        self.token = {
+            ".refreshexpires": datetime.utcnow() + timedelta(seconds=60),
+            ".expires": datetime.utcnow() + timedelta(seconds=60),
+            "token_type": "",
+            "access_token": "",
+        }
+        self.requested_token: bool = False
         self.sem = asyncio.Semaphore(1)
 
     async def ensure_access_token(self):
@@ -32,12 +40,13 @@ class TokenManager:
         async with self.sem:
             datetime_now = datetime.utcnow() + timedelta(seconds=60)
 
-            if self.token is None or self.token[".refreshexpires"] < datetime_now:
+            if not self.requested_token or self.token[".refreshexpires"] < datetime_now:
                 await self._get_token()
+                self.requested_token = self.token[".refreshexpires"] >= datetime_now
             elif self.token[".expires"] < datetime_now:
                 await self._refresh_token()
 
-            return f"{self.token['token_type'].title()} {self.token['access_token']}"
+            return f"{self.token['token_type']} {self.token['access_token']}"
 
     async def _fetch_token(self, data) -> Any:
         async with aiohttp.ClientSession() as session:
@@ -71,4 +80,4 @@ class TokenManager:
             "refresh_token": self.token["refresh_token"],
             "grant_type": "refresh_token",
         }
-        return self._fetch_token(data)
+        return await self._fetch_token(data)

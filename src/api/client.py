@@ -7,7 +7,7 @@ from urllib.parse import urljoin
 
 from .ordenes import OrdenDeCompra, OrdenDeVenta, OrdenFCI
 
-from .utils import iol_decoder_hook, get_logger
+from .utils import get_logger
 from .token_manager import TokenManager
 from .constants import (
     Administradora,

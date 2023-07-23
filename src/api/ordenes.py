@@ -9,7 +9,6 @@ def validez_by_default():
     return datetime(today.year, today.month, today.day, 23, 59, 59)
 
 
-# Refactor: usar dataclass
 class OrdenDeCompra:
     def __init__(
         self,

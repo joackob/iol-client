@@ -10,12 +10,8 @@ test = "pytest"
 pip = "*"
 aiohttp = "*"
 pandas = "*"
-openpyxl = "*"
-et-xmlfile = "*"
-matplotlib = "*"
 
 [dev-packages]
-ipykernel = "*"
 pytest-asyncio = "*"
 pytest = "*"
 

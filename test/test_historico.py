@@ -1,4 +1,5 @@
 import datetime
+import logging
 import os
 import time
 from src.api.client import IOLClient
@@ -10,7 +11,7 @@ import pytest
 async def test_get_hisctorico_del_ultimo_mes():
     user = os.getenv("IOL_USER") or ""
     password = os.getenv("IOL_PASS") or ""
-    client = IOLClient(username=user, password=password)
+    client = IOLClient(username=user, password=password, logging_level=logging.DEBUG)
     hoy = datetime.datetime.now()
     hace_un_mes = hoy - datetime.timedelta(days=30)
     historico = await client.get_titulo_historicos(
@@ -27,7 +28,7 @@ async def test_get_hisctorico_del_ultimo_mes():
 async def test_get_hisctorico_de_dos_simbolos_distintos():
     user = os.getenv("IOL_USER") or ""
     password = os.getenv("IOL_PASS") or ""
-    client = IOLClient(username=user, password=password)
+    client = IOLClient(username=user, password=password, logging_level=logging.DEBUG)
     hoy = datetime.datetime.now()
     hace_un_mes = hoy - datetime.timedelta(days=30)
     historico_ggal = await client.get_titulo_historicos(
@@ -51,7 +52,7 @@ async def test_get_hisctorico_de_dos_simbolos_distintos():
 async def test_get_hisctorico_de_dos_simbolos_distintos_con_un_delta_t_entre_cada_consulta():
     user = os.getenv("IOL_USER") or ""
     password = os.getenv("IOL_PASS") or ""
-    client = IOLClient(username=user, password=password)
+    client = IOLClient(username=user, password=password, logging_level=logging.DEBUG)
     hoy = datetime.datetime.now()
     hace_un_mes = hoy - datetime.timedelta(days=30)
     historico_ggal = await client.get_titulo_historicos(

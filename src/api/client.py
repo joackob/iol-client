@@ -7,7 +7,7 @@ from urllib.parse import urljoin
 
 from .ordenes import OrdenDeCompra, OrdenDeVenta, OrdenFCI
 
-from .utils import get_logger
+from .utils import get_logger, iol_decoder_hook
 from .token_manager import TokenManager
 from .constants import (
     Administradora,
@@ -77,8 +77,8 @@ class IOLClient:
 
                 data = await resp.text()
 
-        # return json.loads(data, object_hook=iol_decoder_hook)
-        return json.loads(data)
+        return json.loads(data, object_hook=iol_decoder_hook)
+        # return json.loads(data)
 
     # ----------------------------
     # AsesoresTestInversor

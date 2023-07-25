@@ -219,7 +219,9 @@ class IOLClient:
         return await self._request(method=MethodRequest.GET, url=path)
 
     # Obtener los paneles segun el pais e instrumento
-    async def get_paneles(self, pais: Pais, instrumento: Instrumento):
+    async def get_paneles(
+        self, pais: Pais, instrumento: Instrumento.ARG | Instrumento.USA
+    ):
         path = f"{pais}/Titulos/Cotizacion/Paneles/{instrumento}"
         return await self._request(method=MethodRequest.GET, url=path)
 

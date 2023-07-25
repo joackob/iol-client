@@ -16,7 +16,7 @@ def iol_decoder_hook(dct):
                 )
 
             # 2021-11-24T17:00:22.082
-            elif re.match(r"(\d{4}\-\d{2}\-\d{2}T\d{2}\:\d{2}\:\d{2}\.\d{1,3})", v):
+            elif re.match(r"(\d{4}\-\d{2}\-\d{2}T\d{2}\:\d{2}\:\d{2}\.\d{1,3}$)", v):
                 dct[k] = datetime.utcfromtimestamp(
                     pd.to_datetime(v, format="%Y-%m-%dT%H:%M:%S.%f").timestamp()
                 )

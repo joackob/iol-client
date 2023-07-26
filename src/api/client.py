@@ -17,6 +17,7 @@ from .constants import (
     Mercado,
     Pais,
     Panel,
+    Plazo,
     TipoFondo,
 )
 
@@ -265,4 +266,11 @@ class IOLClient:
         | Panel.USA.BONOS,
     ):
         path = f"Cotizaciones/{instrumento}/{panel}/{pais}"
+        return await self._request(method=MethodRequest.GET, url=path)
+
+    # obtener cotizacion en detalle de un titulo a un de terminado plazo (experimental)
+    async def get_titulo_cotizacion_plazo(
+        self, mercado: Mercado, simbolo: str, plazo: Plazo
+    ):
+        path = f"{mercado}/Titulos/{simbolo}/CotizacionDetalleMobile/{plazo}"
         return await self._request(method=MethodRequest.GET, url=path)

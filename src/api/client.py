@@ -254,7 +254,15 @@ class IOLClient:
 
     # Obtener el panel de cotizaciones
     async def get_panel_cotizaciones(
-        self, pais: Pais, instrumento: Instrumento, panel: Panel
+        self,
+        pais: Pais,
+        instrumento: Instrumento.ARG | Instrumento.USA,
+        panel: Panel.ARG.ACCIONES
+        | Panel.ARG.BONOS
+        | Panel.ARG.OPCIONES
+        | Panel.ARG.FUTUROS
+        | Panel.ARG.FCI
+        | Panel.USA.BONOS,
     ):
         path = f"Cotizaciones/{instrumento}/{panel}/{pais}"
         return await self._request(method=MethodRequest.GET, url=path)

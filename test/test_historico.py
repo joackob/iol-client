@@ -2,7 +2,7 @@ import datetime
 import logging
 import os
 import time
-from iol_client.client import IOLClient
+from iol_client import IOLClient
 from iol_client.constants import Ajustada, Mercado
 import pytest
 

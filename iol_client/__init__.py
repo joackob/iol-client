@@ -1,1 +1,1 @@
-from client import IOLClient
+from .client import IOLClient

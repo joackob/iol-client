@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "iol-client"
+version = "0.1.0"
+description = "A client for IOL API"
+authors = ["Joaquin Blanco <blancojoaquin77@gmail.com>"]
+license = "MIT License"
+readme = "README.md"
+packages = [{include = "iol_client"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+pandas = "^2.0.3"
+aiohttp = "^3.8.5"
+
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.4.0"
+pytest-asyncio = "^0.21.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

@@ -7,6 +7,9 @@ license = "MIT License"
 readme = "README.md"
 packages = [{include = "iol_client"}]
 
+[tools.setuptools]
+packages = ["src"]
+
 [tool.poetry.dependencies]
 python = "^3.11"
 pandas = "^2.0.3"

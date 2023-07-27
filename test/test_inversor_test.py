@@ -1,5 +1,5 @@
 import os
-from src.api.client import IOLClient
+from src.client import IOLClient
 import pytest
 
 

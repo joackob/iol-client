@@ -5,10 +5,7 @@ description = "A client for IOL API"
 authors = ["Joaquin Blanco <blancojoaquin77@gmail.com>"]
 license = "MIT License"
 readme = "README.md"
-packages = [{include = "iol_client"}]
 
-[tools.setuptools]
-packages = ["src"]
 
 [tool.poetry.dependencies]
 python = "^3.11"

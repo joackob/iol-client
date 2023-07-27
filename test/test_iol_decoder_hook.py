@@ -1,5 +1,4 @@
-import datetime
-from src.api.utils import iol_decoder_hook
+from src.utils import iol_decoder_hook
 
 
 def test_iol_decoder_hook():

@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "iol-client"
+name = "iol_client"
 version = "0.1.0"
 description = "A client for IOL API"
 authors = ["Joaquin Blanco <blancojoaquin77@gmail.com>"]

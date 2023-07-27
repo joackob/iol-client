@@ -2,8 +2,8 @@ import datetime
 import logging
 import os
 import time
-from src.client import IOLClient
-from src.constants import Ajustada, Mercado
+from IOLClient.client import IOLClient
+from IOLClient.constants import Ajustada, Mercado
 import pytest
 
 

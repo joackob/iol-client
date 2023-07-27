@@ -1,5 +1,5 @@
 import os
-from src.client import IOLClient
+from IOLClient.client import IOLClient
 
 
 def test_get_asesores_test_inversor():

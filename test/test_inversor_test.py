@@ -1,5 +1,5 @@
 import os
-from src.iol_client.client import IOLClient
+from iol_client.client import IOLClient
 import pytest
 
 

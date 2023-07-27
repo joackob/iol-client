@@ -1,4 +1,4 @@
-from src.iol_client.utils import iol_decoder_hook
+from iol_client.utils import iol_decoder_hook
 
 
 def test_iol_decoder_hook():

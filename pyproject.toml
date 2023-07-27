@@ -5,7 +5,7 @@ description = "A client for IOL API"
 authors = ["Joaquin Blanco <blancojoaquin77@gmail.com>"]
 license = "MIT License"
 readme = "README.md"
-packages = [{include = "src"}]
+packages = [{include = "src/client.py"}, {include = 'src/constants.py'}, {include = 'src/ordenes.py'}]
 
 
 [tool.poetry.dependencies]

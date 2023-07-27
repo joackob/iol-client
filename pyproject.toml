@@ -1,11 +1,11 @@
 [tool.poetry]
-name = "IOLClient"
+name = "iol_client"
 version = "0.1.0"
 description = "A client for IOL API"
 authors = ["Joaquin Blanco <blancojoaquin77@gmail.com>"]
 license = "MIT License"
 readme = "README.md"
-packages = [{include = 'IOLClient'}]
+packages = [{include = 'src/iol_client'}]
 
 
 [tool.poetry.dependencies]

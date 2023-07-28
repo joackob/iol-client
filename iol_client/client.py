@@ -93,9 +93,9 @@ class IOLClient:
         self, respuesta_inversor, id_cliente_asesorado: int | None = None
     ):
         path = (
-            f"asesores/test-inversor/{id_cliente_asesorado}"
-            if id_cliente_asesorado is not None
-            else "asesores/test-inversor"
+            "asesores/test-inversor"
+            if not id_cliente_asesorado
+            else f"asesores/test-inversor/{id_cliente_asesorado}" 
         )
         return await self._request(
             method=MethodRequest.POST, url=path, json_body=respuesta_inversor
